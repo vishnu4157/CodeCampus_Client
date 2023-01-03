@@ -1,0 +1,42 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.heading-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.posted-ago {
+  display: flex;
+  margin: 0;
+  margin-left: 8px;
+  align-items: center;
+}
+
+.username-cat {
+  display: flex;
+  gap: 20px;
+  font-size: 15px;
+}
+
+.comment-box-main:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid grey;
+}
+
+.to-bold {
+  font-weight: bold;
+}
+
+.bar {
+  position: flex;
+}
+
+.tent {
+  display: flex;
+  justify-content: space-between;
+}
