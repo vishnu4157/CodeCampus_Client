@@ -119,7 +119,9 @@ const MuiCard = (props) => {
                 {props.category}
               </Button>
               <Button>{props.username}</Button>
-              <p className="posted-ago">{`posted at ${dandt}`}</p>
+              <p className="posted-ago">
+                {props.created_at !== "" ? `posted at ${dandt}` : null}
+              </p>
             </div>
             <Stack
               divider={
