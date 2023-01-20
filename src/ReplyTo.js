@@ -9,15 +9,23 @@ import {
   Avatar,
   Divider,
 } from "@mui/material";
+import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import EditIcon from "@mui/icons-material/Edit";
 import ReplyRoundedIcon from "@mui/icons-material/ReplyRounded";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
-import { EditCommentsContext } from "./EachPost";
 import { TextField } from "@mui/material";
+import { useContext } from "react";
+import { useControlled } from "@material-ui/core";
+import { DelCommentsContext } from "./EachPost";
+import { EditCommentsContext } from "./EachPost";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 
 const useStyles = makeStyles((theme) => ({
   pre: {
@@ -28,43 +36,20 @@ const useStyles = makeStyles((theme) => ({
 
 const MuiCard = (props) => {
   const TextFieldWrap = useStyles();
-  const [hit, setHit] = useState(false);
   const [category, setCategory] = useState("");
-  const [postToDel, setPostToDel] = useState(0);
+  const { postToDel, setPostToDel } = useContext(DelCommentsContext);
   const [editClicked, setEditClicked] = useState(false);
-  const [contents, setContents] = useState("");
+  const [toEdit, setToEdit] = useState(0);
   const [contentToEdit, setContentToedit] = useState("");
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  function handleSubmit() {
-    handleClose;
-  }
-
-  function handleLike() {
-    if (!hit) {
-      setLikes((prevLikes) => {
-        return prevLikes + 1;
-      });
-      setHit(true);
-    } else {
-      setLikes((prevLikes) => {
-        return prevLikes - 1;
-      });
-      setHit(false);
-    }
-  }
+  const [content, setContent] = useState(props.content);
+  const { editAmt, setEditAmt } = useContext(EditCommentsContext);
+  const [replyClicked, setReplyClicked] = useState(false);
+  const [contentReplied, setContentReplied] = useState("");
+  const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
   function goToCat(e) {
-    e.preventDefault();
     setCategory(e.currentTarget.textContent);
   }
 
@@ -78,29 +63,46 @@ const MuiCard = (props) => {
 
   function handleDel() {
     axios
-      .delete(`http://localhost:3000/posts/${postToDel}`)
+      .delete(`http://localhost:3000/comments/${postToDel}`)
       .then((res) => {
-        navigate("/Mainpage");
+        console.log(postToDel);
+        setPostToDel(0);
       })
       .catch((err) => console.log("del error"));
   }
 
   useEffect(() => {
-    postToDel > 0 ? handleDel() : null;
+    postToDel !== 0 ? handleDel() : null;
   }, [postToDel]);
 
   function handleEdit(e) {
     if (e.key === "Enter" && !event.shiftKey) {
       axios
-        .patch(`http://localhost:3000/posts/${props.post_id}`, {
-          post: { content: contentToEdit },
+        .patch(`http://localhost:3000/comments/${toEdit}`, {
+          comment: { content: contentToEdit },
         })
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
       setEditClicked(false);
-      if (props.setChildChange) {
-        props.setChildChange((prev) => prev + 1);
-      }
+      setEditAmt((prev) => prev + 1);
+    }
+  }
+
+  function submitReply(e) {
+    if (e.key === "Enter" && !event.shiftKey) {
+      const data = {
+        content: contentReplied,
+        user_id: props.curr_user,
+        post_id: props.main_post_id,
+        reply: props.content,
+      };
+      axios
+        .post("http://localhost:3000/comments", { comment: data })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+
+      setEditAmt((prev) => prev + 1);
+      setReplyClicked(false);
     }
   }
 
@@ -115,40 +117,32 @@ const MuiCard = (props) => {
         <Card>
           <CardContent>
             <div className="username-cat">
+              <Avatar
+                alt="Remy Sharp"
+                src={`https://api.multiavatar.com/${props.post_user}.png`}
+              />
               <Button className="to-bold" onClick={goToCat} variant="outlined">
                 {props.category}
               </Button>
               <Button>{props.username}</Button>
               <p className="posted-ago">{`posted at ${dandt}`}</p>
             </div>
+
             <Stack
-              divider={
-                <Divider orientation="horizontal" flexItem padding={1} />
-              }
+              // direction="row"
+              spacing={2}
+              padding={0.5}
+              sx={{ marginLeft: "50px" }}
             >
-              <Stack
-                direction="row"
-                spacing={2}
-                padding={0.5}
-                alignItems="center"
-              >
-                <Avatar
-                  alt="Remy Sharp"
-                  src={`https://api.multiavatar.com/${props.post_user}.png`}
-                />
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component="div"
-                  className="heading-card"
-                  margin="25px"
-                >
+              {props.title ? (
+                <div onClick={() => setOpen(true)} className="replied">
                   {props.title}
-                </Typography>
-              </Stack>
+                </div>
+              ) : null}
+
               {editClicked ? (
                 <TextField
-                  value={contents}
+                  value={content}
                   multiline
                   expands="true"
                   fullWidth
@@ -156,7 +150,7 @@ const MuiCard = (props) => {
                   onKeyPress={handleEdit}
                   onChange={(e) => {
                     setContentToedit(e.target.value);
-                    setContents(e.target.value);
+                    setContent(e.target.value);
                   }}
                 />
               ) : (
@@ -164,7 +158,7 @@ const MuiCard = (props) => {
                   variant="body"
                   color="text.Secondary"
                   padding="10px"
-                  sx={{ marginLeft: "60px", marginTop: "10px" }}
+                  sx={{ marginTop: "10px" }}
                   style={{ wordWrap: "break-word" }}
                   className={TextFieldWrap.pre}
                 >
@@ -179,7 +173,6 @@ const MuiCard = (props) => {
                 <Button
                   onClick={() => {
                     setPostToDel(props.post_id);
-                    handleDel();
                   }}
                   variant="outlined"
                   startIcon={<DeleteIcon />}
@@ -188,14 +181,13 @@ const MuiCard = (props) => {
                   Delete
                 </Button>
                 <Button
-                  onClick={() => {
-                    setEditClicked((prev) => !prev);
-                    setContents(props.content);
-                    console.log(contents);
-                  }}
                   variant="outlined"
                   startIcon={<EditIcon />}
                   sx={{ marginLeft: "16px" }}
+                  onClick={() => {
+                    setEditClicked((prev) => !prev);
+                    setToEdit(props.post_id);
+                  }}
                 >
                   Edit
                 </Button>
@@ -205,12 +197,41 @@ const MuiCard = (props) => {
               variant="outlined"
               startIcon={<ReplyRoundedIcon />}
               sx={{ marginLeft: "16px" }}
+              onClick={() => setReplyClicked((prev) => !prev)}
             >
               Reply
             </Button>
           </CardActions>
+          {replyClicked ? (
+            <TextField
+              label="Comment Here"
+              variant="outlined"
+              multiline
+              sx={{ margin: "10px", width: "97%" }}
+              onChange={(e) => setContentReplied(e.target.value)}
+              onKeyPress={submitReply}
+            />
+          ) : null}
         </Card>
       </Box>
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <DialogTitle>Replied To</DialogTitle>
+        <DialogContent>
+          <Typography
+            variant="body"
+            color="text.Secondary"
+            padding="10px"
+            sx={{ marginTop: "10px" }}
+            style={{ wordWrap: "break-word" }}
+            className={TextFieldWrap.pre}
+          >
+            {props.title}
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)}>Cancel</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

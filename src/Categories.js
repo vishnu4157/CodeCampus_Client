@@ -18,7 +18,7 @@ export default function PositionedMenu() {
     "Historical",
     "contemporary",
     "Drama",
-    "R&B"
+    "R&B",
   ];
 
   return (
@@ -41,15 +41,17 @@ export default function PositionedMenu() {
         onClose={handleClose}
         anchorOrigin={{
           vertical: "top",
-          horizontal: "left"
+          horizontal: "left",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "left"
+          horizontal: "left",
         }}
       >
-        {Categories.map((cat) => (
-          <MenuItem onClick={handleClose}>{cat}</MenuItem>
+        {Categories.map((cat, index) => (
+          <MenuItem key={index} onClick={handleClose}>
+            {cat}
+          </MenuItem>
         ))}
       </Menu>
     </>

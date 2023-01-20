@@ -40,3 +40,43 @@
   display: flex;
   justify-content: space-between;
 }
+
+.replied-to {
+  width: 350px;
+  height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-left: 5px solid red;
+  height: 20px;
+  padding: 10px;
+}
+
+a.react-router-link{
+  text-decoration: "none";
+}
+
+.replied {
+  width: 450px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-left: 5px solid red;
+  height: 20px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.replied:hover {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  
+}
+
+.Forum-Name:hover {
+  color: gray;
+  transform: scale(1.1);
+
+}
+
+
+
