@@ -35,14 +35,6 @@ npm start
 
 ## Lessons Learnt and Future Improvement Ideas
 
-**First Time Dealing with Web Development:**
-
-As this was my first time working with web development, I had to learn React and Ruby on Rails from scratch. I had to self-learn the languages and their fundamentals in just one week, which was a challenging but rewarding experience.
-
-**Self Learn the Language and its Fundamentals in 1 Week:**
-
-I quickly learned that web development is a vast field and it was important for me to learn the basics as fast as possible. I used online tutorials, documentation, and video lectures to learn the basics of React and Ruby on Rails. Despite the steep learning curve, I was able to learn the fundamentals in just one week.
-
 **File Structuring and Functional Components:**
 
 In hindsight, I realize that my file structuring and the use of functional components could have been better. I should have organized the code into different files based on their use cases, such as creating a new folder called "components" or "pages". This would have made the code more readable and easier to navigate.
@@ -70,6 +62,14 @@ I should have used TypeScript, which would have made it easier to deal with erro
 **In-line styling**
 
 Throughout the development of this project, I used a lot of inline styling rather than creating separate CSS files. This was a conscious choice as I wanted to get familiar with inline styling and learn how it works in a web development context. I found that inline styling allowed me to quickly prototype and test different styles without having to worry about the structure and organization of a separate CSS file. However, I also realized that it can be difficult to manage and maintain large amounts of inline styles. This experience taught me the importance of considering the trade-offs between inline styling and separate CSS files when designing and developing web applications.
+
+**First Time Dealing with Web Development:**
+
+As this was my first time working with web development, I had to learn React and Ruby on Rails from scratch. I had to self-learn the languages and their fundamentals in just one week, which was a challenging but rewarding experience.
+
+**Self Learn the Language and its Fundamentals in 1 Week:**
+
+I quickly learned that web development is a vast field and it was important for me to learn the basics as fast as possible. I used online tutorials, documentation, and video lectures to learn the basics of React and Ruby on Rails. Despite the steep learning curve, I was able to learn the fundamentals in just one week.
 
 **Overall Experience:**
 
