@@ -13,8 +13,22 @@ I am pleased to present my latest project, a web forum front-end built using Rea
 ### Cloning the repository
 Clone the repository.
 
-Https Method:
+HTTPS Method:
 
 ```shell
 git clone https://github.com/vishnu4157/CodeCampus_Client.git
+```
+
+once Cloned, navigate to the root directory of the project:
+
+**NOTE:** please ensure to have cloned the CodeCampus_Server repository as well, before you npm start the client to access the full features.
+
+``shell
+npm install
+```
+
+follwed by:
+
+```shell
+npm start
 ```
