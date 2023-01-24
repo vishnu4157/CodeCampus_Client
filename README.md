@@ -20,7 +20,8 @@ git clone https://github.com/vishnu4157/CodeCampus_Client.git
 ```
 
 **NOTE:** please ensure to have cloned the CodeCampus_Server repository as well, before you npm start the client to access the full features.
-once Cloned, navigate to the root directory of the project:
+
+once Cloned, navigate to the root directory of the project open it in and ensure to:
 
 ```shell
 npm install
