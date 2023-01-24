@@ -67,6 +67,10 @@ I should have set up an axios common header with the JWT token so that it goes t
 
 I should have used TypeScript, which would have made it easier to deal with errors and improve the overall quality of the code. But I went forward with JavaScript as it felt more native to use when initially learning web development on a steep curve.
 
+**In-line styling**
+
+Throughout the development of this project, I used a lot of inline styling rather than creating separate CSS files. This was a conscious choice as I wanted to get familiar with inline styling and learn how it works in a web development context. I found that inline styling allowed me to quickly prototype and test different styles without having to worry about the structure and organization of a separate CSS file. However, I also realized that it can be difficult to manage and maintain large amounts of inline styles. This experience taught me the importance of considering the trade-offs between inline styling and separate CSS files when designing and developing web applications.
+
 **Overall Experience:**
 
 The whole project was undertaken as a first step towards learning about web development on a full stack level. I learned and grew throughout the process, making the experience more important to me than the actual web forum. I thoroughly enjoyed the whole coding experience and I am excited to continue developing my skills and exploring new technologies in the future.
