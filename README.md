@@ -33,7 +33,6 @@ follwed by:
 npm start
 ```
 
-<br />
 ### Lessons Learnt and Future Improvement Ideas
 
 **First Time Dealing with Web Development:**
