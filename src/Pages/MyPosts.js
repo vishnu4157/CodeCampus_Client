@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Card, CardContent, Typography } from "@mui/material";
 import Navbar from "../Navbar";
 import axios from "axios";
@@ -48,17 +48,23 @@ const hello = () => {
       <div style={{ margin: "10px" }}>
         {posts &&
           posts.map((post, index) => (
-            <MuiCard
-              key={index}
-              title={post.title}
-              content={post.content}
-              category={post.category}
-              username={post.user.username}
-              created_at={post.created_at}
-              post_id={post.id}
-              post_user={post.user.id}
-              curr_user={userId}
-            />
+            <Link
+              ey={index}
+              style={{ textDecoration: "none" }}
+              to={`/post/${post.id}`}
+            >
+              <MuiCard
+                key={index}
+                title={post.title}
+                content={post.content}
+                category={post.category}
+                username={post.user.username}
+                created_at={post.created_at}
+                post_id={post.id}
+                post_user={post.user.id}
+                curr_user={userId}
+              />
+            </Link>
           ))}
       </div>
     </>
