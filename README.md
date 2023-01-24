@@ -33,7 +33,7 @@ follwed by:
 npm start
 ```
 
-### Lessons Learnt and Future Improvement Ideas
+## Lessons Learnt and Future Improvement Ideas
 
 **First Time Dealing with Web Development:**
 
