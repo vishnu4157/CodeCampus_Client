@@ -1,6 +1,6 @@
 //@@author NguyenDa18-reused
 //Reused from https://codesandbox.io/s/materialui-signup-form-x0ne1?from-embed=&file=/src/SignInSide.js
-// code only reused for the UI. login and sign up logic was self implemented
+// code only reused for the UI. Features, login and sign up logic was self implemented
 
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
