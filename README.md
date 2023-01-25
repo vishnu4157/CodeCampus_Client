@@ -11,6 +11,10 @@ I am pleased to present my latest project, a web forum front-end built using Rea
 
 ## Getting Started
 
+### User Guide for the Features
+
+link: https://drive.google.com/file/d/1mv8tdPtMw2bsDteg8RJnVoDPebykMYDM/view?usp=sharing
+
 ### Cloning the repository
 
 Clone the repository.
