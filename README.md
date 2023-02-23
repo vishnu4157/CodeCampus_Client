@@ -1,5 +1,5 @@
 <h1 align="center">CodeCampus</h1>
-<p align="center">Vishnu (A0235211X)</p>
+<p align="center">Vishnu</p>
 
 ## Basic Overview
 
